@@ -15,7 +15,7 @@ class LoginForm extends Component {
 
   onButtonPress() {
     const { email, password } = this.props;
-
+    console.log('you tried to sign in with ${email} and ${password}');
     this.props.loginUser({ email, password });
   }
 
