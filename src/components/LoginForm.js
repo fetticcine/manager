@@ -19,19 +19,16 @@ class LoginForm extends Component {
     this.props.loginUser({ email, password });
   }
 
-renderError() {
-  if (this.props.error) {
-    return (
-      <View style={{ flex: 1, backgroundColor: 'grey' }}>
-        <Text style={styles.errorTextStyle}>
-          {this.props.error}
-        </Text>
-      </View>
-    );
-  }
-}
+renderError = error => (
+    <View style={{ flex: 1, backgroundColor: 'grey' }}>
+      <Text style={styles.errorTextStyle}>
+        {error}
+      </Text>
+    </View>
+  );
 
   render() {
+    const { email, password, error } = this.props;
     return (
       <Card>
         <CardSection>
@@ -40,7 +37,7 @@ renderError() {
             placeholder="email@gmail.com"
             onChangeText={this.onEmailChange.bind(this)}
             //This comes from the state object that was handled by the AuthReducer
-            value={this.props.email}
+            value={email}
           />
         </CardSection>
 
@@ -50,13 +47,13 @@ renderError() {
             label="Password"
             placeholder="password"
             onChangeText={this.onPasswordChange.bind(this)}
-            value={this.props.password}
+            value={password}
 
           />
         </CardSection>
 
         <CardSection>
-          {this.renderError()}
+          {error && this.renderError(error)}
           <Button onPress={this.onButtonPress.bind(this)}>
             Log in
           </Button>
